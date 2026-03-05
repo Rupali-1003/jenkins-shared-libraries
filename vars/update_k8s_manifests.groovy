@@ -28,13 +28,9 @@ def call(Map config = [:]) {
             # Update main application deployment - note the correct image name is rupali215/gemini-clone-app
             sed -i "s|image: rupali215/gemini-clone-app:.*|image: rupali215/gemini-clone-app:${imageTag}|g" ${manifestsPath}/gemini-deployment.yml
             
-         // Update migration job if it exists
-        // if [ -f "${manifestsPath}/12-migration-job.yaml" ]; then
-        // sed -i "s|image: rupali215/easyshop-migration:.*|image: rupali215/easyshop-migration:${imageTag}|g" ${manifestsPath}/12-migration-job.yaml
-         // fi
             
             # Ensure ingress is using the correct domain
-            if [ -f "${manifestsPath}/10-ingress.yaml" ]; then
+            if [ -f "${manifestsPath}/gemini-ingress.yml" ]; then
                 sed -i "s|host: .*|host: localhost.nip.io|g" ${manifestsPath}/gemini-ingress.yml
             fi
             
